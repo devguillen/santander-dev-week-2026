@@ -1,62 +1,40 @@
-# Santander Dev Week 2023
+# DevQuest API - Gamified Portfolio (Nível Avançado)
 
-Java RESTful API criada para a Santander Dev Week.
+Bem-vindo(a) ao **DevQuest API**, um projeto revolucionário desenvolvido para o Santander Dev Week 2023. Este projeto é uma evolução ("Nível Avançado") que muda completamente o contexto da aplicação base, transformando o seu portfólio em um "RPG Gamificado".
 
-## Principais Tecnologias
- - **Java 17**: Utilizaremos a versão LTS mais recente do Java para tirar vantagem das últimas inovações que essa linguagem robusta e amplamente utilizada oferece;
- - **Spring Boot 3**: Trabalharemos com a mais nova versão do Spring Boot, que maximiza a produtividade do desenvolvedor por meio de sua poderosa premissa de autoconfiguração;
- - **Spring Data JPA**: Exploraremos como essa ferramenta pode simplificar nossa camada de acesso aos dados, facilitando a integração com bancos de dados SQL;
- - **OpenAPI (Swagger)**: Vamos criar uma documentação de API eficaz e fácil de entender usando a OpenAPI (Swagger), perfeitamente alinhada com a alta produtividade que o Spring Boot oferece;
- - **Railway**: facilita o deploy e monitoramento de nossas soluções na nuvem, além de oferecer diversos bancos de dados como serviço e pipelines de CI/CD.
+## 🚀 O Projeto
 
-## [Link do Figma](https://www.figma.com/file/0ZsjwjsYlYd3timxqMWlbj/SANTANDER---Projeto-Web%2FMobile?type=design&node-id=1421%3A432&mode=design&t=6dPQuerScEQH0zAn-1)
+A ideia é transformar o tradicional currículo PDF em uma experiência API First, focada 100% num Desenvolvedor Herói que sobe de nível conforme completa Quests (projetos) e permite que Recrutadores enviem Propostas diretamente pelo Swagger.
 
-O Figma foi utilizado para a abstração do domínio desta API, sendo útil na análise e projeto da solução.
+## 🛠 Tecnologias e Padrões (Nível Avançado)
 
-## Diagrama de Classes (Domínio da API)
+- **Java 17** e **Spring Boot 3**
+- **Spring Data JPA** (PostgreSQL / H2)
+- **OpenAPI / Swagger** (Documentação dos endpoints)
+- **DTOs com Java Records**: Padrão de transferência de dados moderno.
+- **Global Exception Handling**: Usando `@RestControllerAdvice` para centralizar as mensagens e códigos de erro e manter as respostas elegantes.
 
-```mermaid
-classDiagram
-  class User {
-    -String name
-    -Account account
-    -Feature[] features
-    -Card card
-    -News[] news
-  }
+## 🔗 Endpoints de Destaque
 
-  class Account {
-    -String number
-    -String agency
-    -Number balance
-    -Number limit
-  }
+- `POST /api/developers` - Crie o seu Perfil/Personagem no banco de dados.
+- `POST /api/developers/{id}/quests` - Complete uma Quest (adicione projetos do GitHub e ganhe XP e Level).
+- `POST /api/proposals/developer/{id}` - Recrutadores podem usar este endpoint para enviar ofertas de emprego com Range Salarial!
 
-  class Feature {
-    -String icon
-    -String description
-  }
+## 🏃‍♂️ Como Rodar (Local e Nuvem)
 
-  class Card {
-    -String number
-    -Number limit
-  }
+### Localmente
+1. Mantenha o perfil ativo como `dev` em `application.yml` (utiliza o H2 Database em memória).
+2. Execute o projeto na raiz:
+   ```bash
+   ./gradlew bootRun
+   ```
+3. Abra a documentação Swagger com UI interativa em: `http://localhost:8080/swagger-ui.html`
 
-  class News {
-    -String icon
-    -String description
-  }
+### Deploy no Railway
+1. Conecte o repositório ao seu projeto **Railway**.
+2. O framework já suporta leitura do `application-prd.yml` desde que as variáveis de ambiente corretas do PostgreSQL estejam lá (PGHOST, PGDATABASE, PGPORT, PGUSER, PGPASSWORD).
+3. Adicione o comando de Start `java -jar build/libs/santander-dev-week-2023-0.0.1-SNAPSHOT.jar`. Prontinho!
 
-  User "1" *-- "1" Account
-  User "1" *-- "N" Feature
-  User "1" *-- "1" Card
-  User "1" *-- "N" News
-```
+## 👩‍💻 Autor
 
-## IMPORTANTE
-
-Este projeto foi construído com um viés totalmente educacional para a DIO. Por isso, disponibilizamos uma versão mais robusta dele no repositório oficial da DIO:
-
-### [digitalinnovationone/santander-dev-week-2023-api](https://github.com/digitalinnovationone/santander-dev-week-2023-api)
-
-Lá incluímos todas os endpoints de CRUD, além de aplicar boas práticas (uso de DTOs e refinamento na documentação da OpenAPI). Sendo assim, caso queira um desafio/referência mais completa é só acessar 👊🤩
+- Feito por meio do desafio [Santander Dev Week 2023](https://github.com/digitalinnovationone/santander-dev-week-2023-api) com auxílio e arquitetura refinada.
