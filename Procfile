@@ -1,1 +1,1 @@
-web: java -jar build/libs/santander-dev-week-2023-0.0.1-SNAPSHOT.jar
+web: ./gradlew build -x test && java -Dspring.profiles.active=prd -jar build/libs/santander-dev-week-2023-0.0.1-SNAPSHOT.jar
